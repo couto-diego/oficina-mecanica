@@ -63,8 +63,8 @@ WSGI_APPLICATION = "oficina.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": config('DB_ENGINE'),
-        "NAME": BASE_DIR / config('DB_NAME'),
-        "USER": config('DB_USER'
+        "NAME": config('DB_NAME'),  # Removido BASE_DIR / para evitar problemas com PostgreSQL
+        "USER": config('DB_USER'),
         "PASSWORD": config('DB_PASSWORD'),
         "HOST": config('DB_HOST'),
         "PORT": config('DB_PORT', default='5432'),
@@ -96,6 +96,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Adicione esta linha para arquivos estáticos
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Certifique-se de que esta linha existe para coletar arquivos estáticos em produção
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

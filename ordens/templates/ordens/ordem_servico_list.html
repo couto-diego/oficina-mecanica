@@ -1,0 +1,34 @@
+<!-- ordens/templates/ordens/ordem_servico_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Ordens de Serviço</h2>
+<a href="{% url 'ordem_servico_create' %}" class="btn btn-primary mb-3">Nova Ordem de Serviço</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Veículo</th>
+            <th>Status</th>
+            <th>Valor Total</th>
+            <th>Data de Emissão</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ordem in ordens %}
+        <tr>
+            <td>{{ ordem.id }}</td>
+            <td>{{ ordem.veiculo.placa }}</td>
+            <td>{{ ordem.get_status_display }}</td>
+            <td>R$ {{ ordem.valor_total }}</td>
+            <td>{{ ordem.data_emissao }}</td>
+            <td>
+                <a href="{% url 'ordem_servico_update' ordem.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'ordem_servico_delete' ordem.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

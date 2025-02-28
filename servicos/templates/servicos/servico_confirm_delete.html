@@ -1,0 +1,12 @@
+<!-- servicos/templates/servicos/servico_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Excluir Serviço</h2>
+<p>Tem certeza que deseja excluir o serviço "{{ servico.nome }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'servico_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

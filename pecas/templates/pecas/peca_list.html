@@ -1,0 +1,28 @@
+<!-- pecas/templates/pecas/peca_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Peças</h2>
+<a href="{% url 'peca_create' %}" class="btn btn-primary mb-3">Nova Peça</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for peca in pecas %}
+        <tr>
+            <td>{{ peca.nome }}</td>
+            <td>R$ {{ peca.valor }}</td>
+            <td>
+                <a href="{% url 'peca_update' peca.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'peca_delete' peca.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

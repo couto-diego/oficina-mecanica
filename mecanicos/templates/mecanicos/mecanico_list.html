@@ -1,0 +1,30 @@
+<!-- mecanicos/templates/mecanicos/mecanico_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Mecânicos</h2>
+<a href="{% url 'mecanico_create' %}" class="btn btn-primary mb-3">Novo Mecânico</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Especialidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mecanico in mecanicos %}
+        <tr>
+            <td>{{ mecanico.nome }}</td>
+            <td>{{ mecanico.telefone }}</td>
+            <td>{{ mecanico.especialidade }}</td>
+            <td>
+                <a href="{% url 'mecanico_update' mecanico.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'mecanico_delete' mecanico.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

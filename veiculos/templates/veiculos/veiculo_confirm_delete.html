@@ -1,0 +1,12 @@
+<!-- veiculos/templates/veiculos/veiculo_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Excluir Veículo</h2>
+<p>Tem certeza que deseja excluir o veículo "{{ veiculo.marca }} {{ veiculo.modelo }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'veiculo_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

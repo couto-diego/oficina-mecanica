@@ -1,0 +1,12 @@
+<!-- ordens/templates/ordens/ordem_servico_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Excluir Ordem de Serviço</h2>
+<p>Tem certeza que deseja excluir a ordem de serviço "{{ ordem.id }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'ordem_servico_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

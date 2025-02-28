@@ -1,0 +1,61 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Bem-vindo à Oficina Mecânica</h2>
+<p>Gerencie clientes, veículos, mecânicos, serviços, peças e ordens de serviço.</p>
+
+<!-- Métricas do Dashboard -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total de Ordens de Serviço</h5>
+                <p class="card-text">{{ metricas.total_os }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento Total</h5>
+                <p class="card-text">R$ {{ metricas.total_faturamento }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Links Rápidos -->
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'cliente_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-people"></i> Clientes
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'veiculo_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-car"></i> Veículos
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'mecanico_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-tools"></i> Mecânicos
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'servico_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-wrench"></i> Serviços
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'peca_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-gear"></i> Peças
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'ordem_servico_list' %}" class="btn btn-primary w-100">
+            <i class="bi bi-clipboard-check"></i> Ordens de Serviço
+        </a>
+    </div>
+</div>
+{% endblock %}

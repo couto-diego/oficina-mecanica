@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<!-- Métricas Gerais -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total de Ordens de Serviço</h5>
+                <p class="card-text">{{ metricas.total_os }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento Total</h5>
+                <p class="card-text">R$ {{ metricas.total_faturamento }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ordens por Status</h5>
+                <canvas id="ordensPorStatusChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento Mensal ({{ ano_corrente }})</h5>
+                <canvas id="faturamentoMensalChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento Semestral ({{ ano_corrente }})</h5>
+                <canvas id="faturamentoSemestralChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento Anual ({{ ano_corrente }})</h5>
+                <p class="card-text">R$ {{ faturamento_anual_total }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts para Gráficos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de Ordens por Status
+    const ordensPorStatusCtx = document.getElementById('ordensPorStatusChart').getContext('2d');
+    const ordensPorStatusChart = new Chart(ordensPorStatusCtx, {
+        type: 'pie',
+        data: {
+            labels: {{ ordens_por_status_labels|safe }},
+            datasets: [{
+                label: 'Ordens por Status',
+                data: {{ ordens_por_status_data|safe }},
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            }]
+        }
+    });
+
+    // Gráfico de Faturamento Mensal
+    const faturamentoMensalCtx = document.getElementById('faturamentoMensalChart').getContext('2d');
+    const faturamentoMensalChart = new Chart(faturamentoMensalCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ faturamento_mensal_labels|safe }},
+            datasets: [{
+                label: 'Faturamento Mensal',
+                data: {{ faturamento_mensal_data|safe }},
+                backgroundColor: '#36A2EB',
+            }]
+        }
+    });
+
+    // Gráfico de Faturamento Semestral
+    const faturamentoSemestralCtx = document.getElementById('faturamentoSemestralChart').getContext('2d');
+    const faturamentoSemestralChart = new Chart(faturamentoSemestralCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ faturamento_semestral_labels|safe }},
+            datasets: [{
+                label: 'Faturamento Semestral',
+                data: {{ faturamento_semestral_data|safe }},
+                backgroundColor: '#FF6384',
+            }]
+        }
+    });
+</script>
+{% endblock %}
